@@ -1,0 +1,21 @@
+# Distribution
+dist/
+
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test
+*.test
+
+# Coverage
+*.out
+
+# Dependency
+# vendor/
+
+# Workspace
+go.work

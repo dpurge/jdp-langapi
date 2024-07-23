@@ -1,0 +1,43 @@
+project_name: lang-api
+
+release:
+  prerelease: auto
+  draft: true
+  name_template: "Language API {{.Version}}"
+
+env:
+  - CGO_ENABLED=1
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: lang-api
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
+    goamd64:
+      - v2
+    targets:
+      # - linux_amd64_v2
+      - windows_amd64_v2
+    dir: cmd
+    main: .
+    binary: lang-api
+    builder: go
+    gobinary: go
+    command: build
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.builtBy=goreleaser
+
+archives:
+  - format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+
+changelog:
+  sort: asc
